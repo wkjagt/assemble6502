@@ -1,0 +1,5 @@
+require "assemble6502/assembler"
+require "assemble6502/instructions"
+require "assemble6502/instructions/instruction"
+require "assemble6502/instructions/lda"
+require "assemble6502/instructions/argument"
