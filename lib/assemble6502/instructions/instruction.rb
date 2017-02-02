@@ -13,6 +13,12 @@ class Assembler::Instructions::Instruction
   end
 
   def to_bytecode
-    [@opcode, @argument_value]
+    [@opcode] + to_little_endian(@argument_value)
+  end
+
+  private
+
+  def to_little_endian(value_string)
+    @argument_value.scan(/.{2}/).reverse.map(&:hex)
   end
 end

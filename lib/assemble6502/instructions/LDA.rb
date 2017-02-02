@@ -7,7 +7,7 @@ class Assembler::Instructions::LDA < Assembler::Instructions::Instruction
       zero_page_absolute_indexed: 0xb5,
       immediate: 0xa9,
       absolute_indexed_on_x: 0xbd,
-      absolute: 0xa9,
+      absolute: 0xad,
       absolute_indexed_on_y: 0xb9,
     }
   end

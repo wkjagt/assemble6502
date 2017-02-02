@@ -31,7 +31,7 @@ class Assembler::Instructions::Argument
   def parse(arguments)
     ADDRESSING_MODE_PATTERNS.each do |addressing_mode, pattern|
       next unless match = pattern.match(arguments)
-      return [addressing_mode, match[1].hex]
+      return [addressing_mode, match[1]]
     end
 
     raise(InvalidArgumentFormat, arguments)

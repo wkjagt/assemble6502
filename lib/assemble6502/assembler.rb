@@ -8,7 +8,7 @@ class Assembler
   def instructions_from_program(program)
     program.each_line.with_index.map do |line, index|
       begin
-        Instructions.resolve(program)
+        Instructions.resolve(line.strip)
       rescue Instructions::UnknownInstruction => e
         raise(e.class, "Unknown instruction #{e.message} on line #{index + 1}")
       end
