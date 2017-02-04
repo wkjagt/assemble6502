@@ -3,27 +3,27 @@ class Assembler::Instructions::Argument
 
   ADDRESSING_MODE_PATTERNS = {
     # (ind,X)
-    indexed_indirect:           /\A\(\$(\h{2}),X\)\z/,
+    indirect_x:  /\A\(\$(\h{2}),X\)\z/,
     #  (ind),Y
-    indirect_indexed:           /\A\(\$(\h{2})\),Y\z/,
+    indirect_y:  /\A\(\$(\h{2})\),Y\z/,
     # zpg
-    zero_page_absolute:         /\A\$(\h{2})\z/,
+    zero_page:   /\A\$(\h{2})\z/,
     # zpg,X
-    zero_page_absolute_indexed: /\A\$(\h{2}),X\z/,
+    zero_page_x: /\A\$(\h{2}),X\z/,
     # #
-    immediate:                  /\A#\$(\h{2})\z/,
+    immediate:   /\A#\$(\h{2})\z/,
     # abs,X
-    absolute_indexed_on_x:      /\A\$(\h{4}),X\z/,
+    absolute_x:  /\A\$(\h{4}),X\z/,
     # abs
-    absolute:                   /\A\$(\h{4})\z/,
+    absolute:    /\A\$(\h{4})\z/,
     # abs,Y
-    absolute_indexed_on_y:      /\A\$(\h{4}),Y\z/,
+    absolute_y:  /\A\$(\h{4}),Y\z/,
   }.freeze
 
-  attr_reader :addressing_mode, :value
+  attr_reader :addressing_mode, :operand
 
   def initialize(arguments)
-   @addressing_mode, @value = parse(arguments)
+   @addressing_mode, @operand = parse(arguments)
   end
 
   private

@@ -1,10 +1,12 @@
 class Assembler::Instructions::BCC < Assembler::Instructions::Instruction
-  def initialize
+  def initialize(argument)
     @description = "Branch on Carry Clear"
     @flags = []
     @branch = true
-    @opcodes_by_addressing_mode = {
+    @addressing_modes = {
       relative: { hex: 0x90, len: 2, },
     }
+
+    super
   end
 end

@@ -1,10 +1,12 @@
 class Assembler::Instructions::BNE < Assembler::Instructions::Instruction
-  def initialize
+  def initialize(argument)
     @description = "Branch on Not Equal"
     @flags = []
     @branch = true
-    @opcodes_by_addressing_mode = {
+    @addressing_modes = {
       relative: { hex: 0xd0, len: 2, },
     }
+
+    super
   end
 end

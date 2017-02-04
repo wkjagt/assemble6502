@@ -1,10 +1,12 @@
 class Assembler::Instructions::<%= instruction_name.to_s.upcase %> < Assembler::Instructions::Instruction
-  def initialize
+  def initialize(argument)
     @description = "<%= data.delete(:description) %>"
     @flags = <%= data.delete(:flags) %>
     @branch = <%= data.delete(:branch) || "nil" %>
-    @opcodes_by_addressing_mode = {<% data.each do |data_name, data_info| %>
+    @addressing_modes = {<% data.each do |data_name, data_info| %>
       <%= data_name %>: { <% data_info.each do |info_name, info_info| %><%= info_name %>: <%= info_name == :hex ? "0x#{info_info.to_s(16)}" : info_info %>, <% end %>},<% end %>
     }
+
+    super
   end
 end

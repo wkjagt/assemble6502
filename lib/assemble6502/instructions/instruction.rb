@@ -2,23 +2,23 @@ class Assembler::Instructions::Instruction
   NoOpcode = Class.new(ArgumentError)
 
   def initialize(argument)
-    addressing_mode = argument.addressing_mode
+    @operand = argument.operand
+    @addressing_mode = argument.addressing_mode
 
-    unless opcodes.key?(addressing_mode)
-      raise(NoOpcode, addressing_mode)
-    end
+    raise(NoOpcode, @addressing_mode) unless @addressing_modes.key?(argument.addressing_mode)
+  end
 
-    @opcode = opcodes.fetch(addressing_mode)
-    @argument_value = argument.value
+  def opcode
+    @addressing_modes[@addressing_mode][:hex]
   end
 
   def to_bytecode
-    [@opcode] + to_little_endian(@argument_value)
+    [opcode] + to_little_endian(@operand)
   end
 
   private
 
   def to_little_endian(value_string)
-    @argument_value.scan(/.{2}/).reverse.map(&:hex)
+    @operand.scan(/.{2}/).reverse.map(&:hex)
   end
 end

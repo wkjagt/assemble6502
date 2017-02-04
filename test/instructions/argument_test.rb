@@ -1,60 +1,60 @@
 require "test_helper"
 
 class Assembler::Instructions::ArgumentTest < ActiveSupport::TestCase
-  test "indexed_indirect" do
+  test "indirect_x" do
     arguments = '($fe,X)'
     parsed = Assembler::Instructions::Argument.new(arguments)
-    assert_equal :indexed_indirect, parsed.addressing_mode
-    assert_equal "fe", parsed.value
+    assert_equal :indirect_x, parsed.addressing_mode
+    assert_equal "fe", parsed.operand
   end
 
-  test "indirect_indexed" do
+  test "indirect_y" do
     arguments = '($fe),Y'
     parsed = Assembler::Instructions::Argument.new(arguments)
-    assert_equal :indirect_indexed, parsed.addressing_mode
-    assert_equal "fe", parsed.value
+    assert_equal :indirect_y, parsed.addressing_mode
+    assert_equal "fe", parsed.operand
   end
 
-  test "zero_page_absolute" do
+  test "zero_page" do
     arguments = '$fe'
     parsed = Assembler::Instructions::Argument.new(arguments)
-    assert_equal :zero_page_absolute, parsed.addressing_mode
-    assert_equal "fe", parsed.value
+    assert_equal :zero_page, parsed.addressing_mode
+    assert_equal "fe", parsed.operand
   end
 
-  test "zero_page_absolute_indexed" do
+  test "zero_page_x" do
     arguments = '$fe,X'
     parsed = Assembler::Instructions::Argument.new(arguments)
-    assert_equal :zero_page_absolute_indexed, parsed.addressing_mode
-    assert_equal "fe", parsed.value
+    assert_equal :zero_page_x, parsed.addressing_mode
+    assert_equal "fe", parsed.operand
   end
 
   test "immediate" do
     arguments = '#$fe'
     parsed = Assembler::Instructions::Argument.new(arguments)
     assert_equal :immediate, parsed.addressing_mode
-    assert_equal "fe", parsed.value
+    assert_equal "fe", parsed.operand
   end
 
   test "absolute_indexed using X register" do
     arguments = '$fefe,X'
     parsed = Assembler::Instructions::Argument.new(arguments)
-    assert_equal :absolute_indexed_on_x, parsed.addressing_mode
-    assert_equal "fefe", parsed.value
+    assert_equal :absolute_x, parsed.addressing_mode
+    assert_equal "fefe", parsed.operand
   end
 
   test "absolute" do
     arguments = '$fefe'
     parsed = Assembler::Instructions::Argument.new(arguments)
     assert_equal :absolute, parsed.addressing_mode
-    assert_equal "fefe", parsed.value
+    assert_equal "fefe", parsed.operand
   end
 
   test "absolute_indexed using Y register" do
     arguments = '$fefe,Y'
     parsed = Assembler::Instructions::Argument.new(arguments)
-    assert_equal :absolute_indexed_on_y, parsed.addressing_mode
-    assert_equal "fefe", parsed.value
+    assert_equal :absolute_y, parsed.addressing_mode
+    assert_equal "fefe", parsed.operand
   end
 
   test "raises for invalid arguments" do

@@ -1,10 +1,12 @@
 class Assembler::Instructions::PHP < Assembler::Instructions::Instruction
-  def initialize
+  def initialize(argument)
     @description = "PusH Processor status"
     @flags = []
     @branch = nil
-    @opcodes_by_addressing_mode = {
+    @addressing_modes = {
       implied: { hex: 0x8, len: 1, cycles: 3, boundry_add: false, },
     }
+
+    super
   end
 end
