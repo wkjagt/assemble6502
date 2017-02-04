@@ -1,14 +1,17 @@
 class Assembler::Instructions::LDA < Assembler::Instructions::Instruction
-  def opcodes
-    {
-      indexed_indirect: 0xa1,
-      indirect_indexed: 0xb1,
-      zero_page_absolute: 0xa5,
-      zero_page_absolute_indexed: 0xb5,
-      immediate: 0xa9,
-      absolute_indexed_on_x: 0xbd,
-      absolute: 0xad,
-      absolute_indexed_on_y: 0xb9,
+  def initialize
+    @description = "LoaD Accumulator"
+    @flags = [:s, :z]
+    @branch = nil
+    @opcodes_by_addressing_mode = {
+      immediate: { hex: 0xa9, len: 2, cycles: 2, boundry_add: false, },
+      zero_page: { hex: 0xa5, len: 2, cycles: 3, boundry_add: false, },
+      zero_page_x: { hex: 0xb5, len: 2, cycles: 4, boundry_add: false, },
+      absolute: { hex: 0xad, len: 3, cycles: 4, boundry_add: false, },
+      absolute_x: { hex: 0xbd, len: 3, cycles: 4, boundry_add: true, },
+      absolute_y: { hex: 0xb9, len: 3, cycles: 4, boundry_add: true, },
+      indirect_x: { hex: 0xa1, len: 2, cycles: 6, boundry_add: false, },
+      indirect_y: { hex: 0xb1, len: 2, cycles: 5, boundry_add: true, },
     }
   end
 end
